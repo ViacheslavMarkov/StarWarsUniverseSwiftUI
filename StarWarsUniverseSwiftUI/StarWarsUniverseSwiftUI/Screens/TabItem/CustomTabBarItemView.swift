@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct CustomTabBarItemView<ViewModel>: View where ViewModel: TabBarItemViewModelProtocol {
+    //MARK: - Properties
     @StateObject var viewModel: ViewModel
     @State private var showingDescriptionScreen = false
+    @State private var selectedModel: StarWarsCellModel?
     
+    @EnvironmentObject var coordinator: Coordinator<MapRouter>
+    
+    //MARK: - init
     init(viewModel: ViewModel) {
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
     
+    //MARK: - Body
     var body: some View {
         NavigationView {
             List(viewModel.models) { model in
@@ -25,21 +31,30 @@ struct CustomTabBarItemView<ViewModel>: View where ViewModel: TabBarItemViewMode
                     .frame(maxHeight: 40)
                     .onTapGesture(perform: {
                         showingDescriptionScreen.toggle()
+                        selectedModel = model
+                        itemTapped()
                     })
-                    .sheet(isPresented: $showingDescriptionScreen) {
-//                        let type = viewModel.getTabBarItem()
-                        let vm = DescriptionViewModel<PeopleModel>(urlString: model.urlString ?? "")
-                        DescriptionView(viewModel: vm)
-                    }
             }
-            .navigationBarTitle(viewModel.getTabBarItem().title)
+            .navigationBarTitleDisplayMode(.large)
+            .navigationTitle(viewModel.getTabBarItem().title)
         }
         .onAppear {
             viewModel.fetchData()
         }
     }
+    
+    //MARK: - Functions
+    func itemTapped() {
+        if let selectedModel = selectedModel {
+            let tab = viewModel.getTabBarItem()
+            guard let urlString = selectedModel.urlString else { return }
+            coordinator.show(.description(urlString: urlString, tab: tab))
+            self.selectedModel = nil
+        }
+    }
 }
 
+//MARK: - Preview
 struct CustomTabBarItemView_Previews: PreviewProvider {
     static var previews: some View {
         let vm = MockTabViewModel()

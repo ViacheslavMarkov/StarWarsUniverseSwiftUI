@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Tab: String, CaseIterable {
+enum Tab: String, CaseIterable, Hashable {
     case people
     case starships
     case planets

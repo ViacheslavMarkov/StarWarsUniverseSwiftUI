@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D3B6F562A26066F00F76308 /* Binding+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3B6F552A26066F00F76308 /* Binding+Extension.swift */; };
+		0D3B6F582A2621FB00F76308 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3B6F572A2621FB00F76308 /* NavigationRouter.swift */; };
+		0D3B6F5A2A26223F00F76308 /* NavigationTransitionStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3B6F592A26223F00F76308 /* NavigationTransitionStyle.swift */; };
+		0D3B6F5C2A26225A00F76308 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3B6F5B2A26225A00F76308 /* Coordinator.swift */; };
+		0D3B6F5E2A26229400F76308 /* MapRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3B6F5D2A26229400F76308 /* MapRouter.swift */; };
 		0D43888E2979B3CA0058D866 /* StarWarsUniverseSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D43888D2979B3CA0058D866 /* StarWarsUniverseSwiftUIApp.swift */; };
-		0D4388902979B3CA0058D866 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D43888F2979B3CA0058D866 /* ContentView.swift */; };
+		0D4388902979B3CA0058D866 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D43888F2979B3CA0058D866 /* MainView.swift */; };
 		0D4388922979B3CD0058D866 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D4388912979B3CD0058D866 /* Assets.xcassets */; };
 		0D4388952979B3CD0058D866 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D4388942979B3CD0058D866 /* Preview Assets.xcassets */; };
 		0D4FE77F2A1F9D7500343753 /* PeopleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D4FE77E2A1F9D7500343753 /* PeopleResponse.swift */; };
@@ -50,12 +55,19 @@
 		0D9296B82A1C9DD400136DC3 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9296B72A1C9DD400136DC3 /* Tab.swift */; };
 		0D9296BB2A1C9E8200136DC3 /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9296BA2A1C9E8200136DC3 /* Image+Extension.swift */; };
 		0D9296BD2A1C9FC300136DC3 /* ColorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9296BC2A1C9FC300136DC3 /* ColorType.swift */; };
+		0D9BC45A2A26642C004C5B5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BC4592A26642C004C5B5E /* AppDelegate.swift */; };
+		0D9BC45C2A266449004C5B5E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9BC45B2A266449004C5B5E /* SceneDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D3B6F552A26066F00F76308 /* Binding+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extension.swift"; sourceTree = "<group>"; };
+		0D3B6F572A2621FB00F76308 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
+		0D3B6F592A26223F00F76308 /* NavigationTransitionStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTransitionStyle.swift; sourceTree = "<group>"; };
+		0D3B6F5B2A26225A00F76308 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		0D3B6F5D2A26229400F76308 /* MapRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRouter.swift; sourceTree = "<group>"; };
 		0D43888A2979B3CA0058D866 /* StarWarsUniverseSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarWarsUniverseSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D43888D2979B3CA0058D866 /* StarWarsUniverseSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarWarsUniverseSwiftUIApp.swift; sourceTree = "<group>"; };
-		0D43888F2979B3CA0058D866 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		0D43888F2979B3CA0058D866 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		0D4388912979B3CD0058D866 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D4388942979B3CD0058D866 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0D4FE77E2A1F9D7500343753 /* PeopleResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleResponse.swift; sourceTree = "<group>"; };
@@ -97,6 +109,8 @@
 		0D9296B72A1C9DD400136DC3 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		0D9296BA2A1C9E8200136DC3 /* Image+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extension.swift"; sourceTree = "<group>"; };
 		0D9296BC2A1C9FC300136DC3 /* ColorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorType.swift; sourceTree = "<group>"; };
+		0D9BC4592A26642C004C5B5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0D9BC45B2A266449004C5B5E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +124,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D3B6F492A2604B400F76308 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				0D43888F2979B3CA0058D866 /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		0D3B6F4E2A26051400F76308 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				0D3B6F572A2621FB00F76308 /* NavigationRouter.swift */,
+				0D3B6F592A26223F00F76308 /* NavigationTransitionStyle.swift */,
+				0D3B6F5B2A26225A00F76308 /* Coordinator.swift */,
+				0D3B6F5D2A26229400F76308 /* MapRouter.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		0D3B6F532A2605B600F76308 /* TabItem */ = {
+			isa = PBXGroup;
+			children = (
+				0D5D25A1297C5C6A005A8C3F /* CustomTabBarItemView.swift */,
+				0D5D25AD297C6E78005A8C3F /* TabBarItemViewModel.swift */,
+				0D875F912A1D1CEF005377B7 /* MockTabViewModel.swift */,
+			);
+			path = TabItem;
+			sourceTree = "<group>";
+		};
+		0D3B6F542A2605CE00F76308 /* Description */ = {
+			isa = PBXGroup;
+			children = (
+				0D875F992A1D4985005377B7 /* DescriptionView.swift */,
+				0D875F9B2A1D499E005377B7 /* DescriptionViewModel.swift */,
+				0D875F9D2A1D4A5E005377B7 /* MockDescriptionViewModel.swift */,
+			);
+			path = Description;
+			sourceTree = "<group>";
+		};
 		0D4388812979B3CA0058D866 = {
 			isa = PBXGroup;
 			children = (
@@ -129,17 +182,19 @@
 		0D43888C2979B3CA0058D866 /* StarWarsUniverseSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				0D9BC4592A26642C004C5B5E /* AppDelegate.swift */,
 				0D43888D2979B3CA0058D866 /* StarWarsUniverseSwiftUIApp.swift */,
+				0D3B6F4E2A26051400F76308 /* Coordinator */,
 				0D5D25AA297C5EA9005A8C3F /* Screens */,
 				0D4388912979B3CD0058D866 /* Assets.xcassets */,
 				0D4388932979B3CD0058D866 /* Preview Content */,
-				0D5D25AF297C6F23005A8C3F /* ViewModels */,
 				0D5D25A9297C5EA0005A8C3F /* Views */,
 				0D4FE7B62A1FA7C000343753 /* Models */,
-				0D4FE7B52A1FA79600343753 /* Utilities2 */,
+				0D4FE7B52A1FA79600343753 /* Utilities */,
 				0D4FE7B72A1FA7EA00343753 /* Networkin */,
 				0D4FE7B92A1FA81E00343753 /* Extensions */,
 				0D4FE7BC2A1FA85300343753 /* Managers */,
+				0D9BC45B2A266449004C5B5E /* SceneDelegate.swift */,
 			);
 			path = StarWarsUniverseSwiftUI;
 			sourceTree = "<group>";
@@ -152,7 +207,7 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		0D4FE7B52A1FA79600343753 /* Utilities2 */ = {
+		0D4FE7B52A1FA79600343753 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				0D5D25A5297C5E75005A8C3F /* ImageNameType.swift */,
@@ -167,7 +222,7 @@
 				0D4FE7AF2A1FA5C500343753 /* GenderType.swift */,
 				0D4FE7B12A1FA5FC00343753 /* StarShipModelType.swift */,
 			);
-			path = Utilities2;
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		0D4FE7B62A1FA7C000343753 /* Models */ = {
@@ -214,6 +269,7 @@
 			children = (
 				0D9296BA2A1C9E8200136DC3 /* Image+Extension.swift */,
 				0D4FE78B2A1F9EA200343753 /* Dictionary+Extension.swift */,
+				0D3B6F552A26066F00F76308 /* Binding+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -238,38 +294,11 @@
 		0D5D25AA297C5EA9005A8C3F /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				0D43888F2979B3CA0058D866 /* ContentView.swift */,
-				0D5D25A1297C5C6A005A8C3F /* CustomTabBarItemView.swift */,
-				0D875F992A1D4985005377B7 /* DescriptionView.swift */,
+				0D3B6F492A2604B400F76308 /* Main */,
+				0D3B6F532A2605B600F76308 /* TabItem */,
+				0D3B6F542A2605CE00F76308 /* Description */,
 			);
 			path = Screens;
-			sourceTree = "<group>";
-		};
-		0D5D25AF297C6F23005A8C3F /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				0D875F9F2A1D4A6B005377B7 /* Tab */,
-				0D875FA02A1D4A74005377B7 /* Description */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		0D875F9F2A1D4A6B005377B7 /* Tab */ = {
-			isa = PBXGroup;
-			children = (
-				0D5D25AD297C6E78005A8C3F /* TabBarItemViewModel.swift */,
-				0D875F912A1D1CEF005377B7 /* MockTabViewModel.swift */,
-			);
-			path = Tab;
-			sourceTree = "<group>";
-		};
-		0D875FA02A1D4A74005377B7 /* Description */ = {
-			isa = PBXGroup;
-			children = (
-				0D875F9B2A1D499E005377B7 /* DescriptionViewModel.swift */,
-				0D875F9D2A1D4A5E005377B7 /* MockDescriptionViewModel.swift */,
-			);
-			path = Description;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -346,21 +375,26 @@
 				0D4FE7A22A1FA1EA00343753 /* StarWarsCellModel.swift in Sources */,
 				0D4FE78E2A1F9F6F00343753 /* VehicleType.swift in Sources */,
 				0D4FE7982A1FA15500343753 /* FilmModel.swift in Sources */,
+				0D3B6F5E2A26229400F76308 /* MapRouter.swift in Sources */,
 				0D875FB82A1E04D3005377B7 /* HorizontalTwoTextView.swift in Sources */,
 				0D4FE78C2A1F9EA200343753 /* Dictionary+Extension.swift in Sources */,
-				0D4388902979B3CA0058D866 /* ContentView.swift in Sources */,
+				0D4388902979B3CA0058D866 /* MainView.swift in Sources */,
 				0D4FE7812A1F9DB500343753 /* PlanetsResponse.swift in Sources */,
 				0D4FE7A02A1FA1CD00343753 /* StarShipModel.swift in Sources */,
 				0D5D25AC297C6CD4005A8C3F /* CellView.swift in Sources */,
 				0D4FE7B02A1FA5C500343753 /* GenderType.swift in Sources */,
+				0D9BC45A2A26642C004C5B5E /* AppDelegate.swift in Sources */,
 				0D5D25AE297C6E78005A8C3F /* TabBarItemViewModel.swift in Sources */,
 				0D4FE7832A1F9DDC00343753 /* RequestResponseProtocol.swift in Sources */,
 				0D4FE79C2A1FA19100343753 /* PlanetModel.swift in Sources */,
 				0D4FE79E2A1FA1B000343753 /* SpecieModel.swift in Sources */,
+				0D3B6F562A26066F00F76308 /* Binding+Extension.swift in Sources */,
 				0D9296BB2A1C9E8200136DC3 /* Image+Extension.swift in Sources */,
 				0D9296B82A1C9DD400136DC3 /* Tab.swift in Sources */,
 				0D4FE7902A1F9F9600343753 /* SpecieType.swift in Sources */,
+				0D3B6F5A2A26223F00F76308 /* NavigationTransitionStyle.swift in Sources */,
 				0D4FE7A82A1FA2E200343753 /* NetworkRequestManager.swift in Sources */,
+				0D9BC45C2A266449004C5B5E /* SceneDelegate.swift in Sources */,
 				0D4FE7962A1FA10F00343753 /* ResponseModelProtocol.swift in Sources */,
 				0D875F9E2A1D4A5E005377B7 /* MockDescriptionViewModel.swift in Sources */,
 				0D4FE7B22A1FA5FC00343753 /* StarShipModelType.swift in Sources */,
@@ -379,6 +413,8 @@
 				0D4FE7A42A1FA20800343753 /* VehicleModel.swift in Sources */,
 				0D43888E2979B3CA0058D866 /* StarWarsUniverseSwiftUIApp.swift in Sources */,
 				0D4FE7942A1FA00600343753 /* StarWarsService.swift in Sources */,
+				0D3B6F582A2621FB00F76308 /* NavigationRouter.swift in Sources */,
+				0D3B6F5C2A26225A00F76308 /* Coordinator.swift in Sources */,
 				0D9296BD2A1C9FC300136DC3 /* ColorType.swift in Sources */,
 				0D875F922A1D1CEF005377B7 /* MockTabViewModel.swift in Sources */,
 				0D875F9C2A1D499E005377B7 /* DescriptionViewModel.swift in Sources */,
@@ -519,6 +555,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -548,6 +585,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

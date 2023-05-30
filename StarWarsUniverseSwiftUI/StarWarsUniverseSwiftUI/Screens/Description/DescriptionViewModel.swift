@@ -31,12 +31,15 @@ final class DescriptionViewModel<T: ResponseModelProtocol>: DescriptionViewModel
     
     init(urlString: String) {
         self.urlString = urlString
+        
+//        fetchItemData()
     }
     
     func fetchItemData() {
         if let model = manager.getFromCacheDictionary(by: urlString),
            let res = model as? T {
             response = res
+            dictionary = response?.description ?? [:]
             return
         }
         

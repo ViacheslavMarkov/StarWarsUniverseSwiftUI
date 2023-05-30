@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MainView.swift
 //  StarWarsUniverseSwiftUI
 //
 //  Created by Viacheslav Markov on 19.01.2023.
@@ -7,15 +7,16 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct MainView: View {
     //MARK: - Properties
     private let tabItems = Tab.planets.tabBarItems
+    
+    @EnvironmentObject var coordinator: Coordinator<MapRouter>
     
     //MARK: - Body
     var body: some View {
         TabView {
             ForEach(tabItems, id: \.self) { tab in
-                //                var vm: TabBarItemViewModelProtocol?
                 switch tab {
                 case .people:
                     let models = [
@@ -136,6 +137,7 @@ struct ContentView: View {
                     createTabView(type: response, tab: tab)
                 }
             }
+            .statusBarHidden(true)
         }
     }
     
@@ -155,8 +157,8 @@ struct ContentView: View {
 }
 
 //MARK: - Preview
-struct ContentView_Previews: PreviewProvider {
+struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        MainView()
     }
 }
