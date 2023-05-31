@@ -21,15 +21,6 @@ enum MapRouter: NavigationRouter {
         }
     }
     
-    var isHideTitle: Bool {
-        switch self {
-        case .main:
-            return true
-        case .description:
-            return false
-        }
-    }
-    
     @ViewBuilder
     func view() -> some View {
         switch self {

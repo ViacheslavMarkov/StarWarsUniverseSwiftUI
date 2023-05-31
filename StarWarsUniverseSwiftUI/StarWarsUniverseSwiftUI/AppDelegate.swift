@@ -19,7 +19,6 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
-//        createMainPage()
         return true
     }
     
@@ -32,14 +31,5 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         let sceneConfig = UISceneConfiguration(name: nil, sessionRole: sessionRole)
         sceneConfig.delegateClass = SceneDelegate.self
         return sceneConfig
-    }
-    
-    private func createMainPage() {
-        let viewController = UIHostingController(rootView: MainView())
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//        window?.rootViewController = coordinator.navigationController
-        window?.rootViewController = viewController
-        window?.makeKeyAndVisible()
-        coordinator.start()
     }
 }
