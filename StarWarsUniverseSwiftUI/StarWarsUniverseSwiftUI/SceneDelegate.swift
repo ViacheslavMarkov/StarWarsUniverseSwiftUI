@@ -17,7 +17,6 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = coordinator.navigationController
-//        coordinator.navigationController.navigationBar.isHidden = true
         window?.makeKeyAndVisible()
         coordinator.start()
     }

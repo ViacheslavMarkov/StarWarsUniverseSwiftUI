@@ -9,25 +9,23 @@ import SwiftUI
 
 class Coordinator<Router: NavigationRouter>: ObservableObject {
     
-    public let navigationController: UINavigationController
-    public let startingRoute: Router?
+     let navigationController: UINavigationController
+     let startingRoute: Router?
     
-    public init(navigationController: UINavigationController = .init(), startingRoute: Router? = nil) {
+     init(navigationController: UINavigationController = .init(), startingRoute: Router? = nil) {
         self.navigationController = navigationController
         self.startingRoute = startingRoute
     }
     
-    public func start() {
+     func start() {
         guard let route = startingRoute else { return }
         show(route)
     }
     
-    public func show(_ route: Router, animated: Bool = true) {
+     func show(_ route: Router, animated: Bool = true) {
         let view = route.view()
         let viewWithCoordinator = view.environmentObject(self)
         let viewController = UIHostingController(rootView: viewWithCoordinator)
-        
-        navigationController.navigationBar.isHidden = route.isHideTitle
         
         switch route.transition {
         case .push:
@@ -41,18 +39,22 @@ class Coordinator<Router: NavigationRouter>: ObservableObject {
         }
     }
     
-    public func pop(animated: Bool = true) {
+     func pop(animated: Bool = true) {
         navigationController.popViewController(animated: animated)
     }
     
-    public func popToRoot(animated: Bool = true) {
+     func popToRoot(animated: Bool = true) {
         navigationController.popToRootViewController(animated: animated)
     }
     
-    open func dismiss(animated: Bool = true) {
+     func dismiss(animated: Bool = true) {
         navigationController.dismiss(animated: true) { [weak self] in
             /// because there is a leak in UIHostingControllers that prevents from deallocation
             self?.navigationController.viewControllers = []
         }
+    }
+    
+    func hideAndShowNavController(isHidden: Bool = false) {
+        navigationController.navigationBar.isHidden = isHidden
     }
 }

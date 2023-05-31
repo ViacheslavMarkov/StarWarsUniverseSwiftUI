@@ -13,8 +13,6 @@ protocol NavigationRouter {
 
     var transition: NavigationTransitionStyle { get }
     
-    var isHideTitle: Bool { get }
-    
     /// Creates and returns a view of assosiated type
     ///
     @ViewBuilder

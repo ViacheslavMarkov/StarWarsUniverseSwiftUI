@@ -23,20 +23,24 @@ struct CustomTabBarItemView<ViewModel>: View where ViewModel: TabBarItemViewMode
     //MARK: - Body
     var body: some View {
         NavigationView {
-            List(viewModel.models) { model in
-                CellView(model: model)
-                    .onAppear {
-                        viewModel.loadMoreContent(currentModel: model)
-                    }
-                    .frame(maxHeight: 40)
-                    .onTapGesture(perform: {
-                        showingDescriptionScreen.toggle()
-                        selectedModel = model
-                        itemTapped()
-                    })
-            }
-            .navigationBarTitleDisplayMode(.large)
+            if !viewModel.models.isEmpty {
+                List(viewModel.models) { model in
+                    CellView(model: model)
+                        .onAppear {
+                            viewModel.loadMoreContent(currentModel: model)
+                        }
+                        .frame(maxHeight: 40)
+                        .onTapGesture(perform: {
+                            showingDescriptionScreen.toggle()
+                            selectedModel = model
+                            itemTapped()
+                        })
+                }
+                .navigationBarTitleDisplayMode(.large)
             .navigationTitle(viewModel.getTabBarItem().title)
+            } else {
+                EmptyMessageView(messageText: "Empty list!")
+            }
         }
         .onAppear {
             viewModel.fetchData()

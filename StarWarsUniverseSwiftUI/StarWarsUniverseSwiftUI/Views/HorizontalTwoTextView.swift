@@ -13,12 +13,21 @@ struct HorizontalTwoTextView: View {
     let value: String
     let isFirstItem: Bool
     
+    var attributedString: AttributedString {
+        if !value.isURLString { return AttributedString(value) }
+        var result = AttributedString(value)
+        result.underlineStyle = Text.LineStyle(
+            pattern: .solid, color: .blue)
+        return result
+    }
+    
     //MARK: - Body
     var body: some View {
         HStack(spacing: 8) {
             Text(key + ":")
                 .foregroundColor(isFirstItem ? Color.black : Color.clear)
-            Text(value)
+            Text(attributedString)
+                .foregroundColor(value.isURLString ? .blue : .black)
         }
     }
 }

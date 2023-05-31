@@ -115,117 +115,35 @@ enum Tab: String, CaseIterable, Hashable {
     var defaultResponseType: any RequestResponseProtocol {
         switch self {
         case .people:
-            let models = [
-                PeopleModel(
-                    name: "name",
-                    gender: "",
-                    urlString: "",
-                    height: "",
-                    mass: "",
-                    films: [],
-                    species: [],
-                    vehicles: [],
-                    starships: [],
-                    hairColor: "",
-                    skinColor: "",
-                    eyeColor: "",
-                    birthYear: "",
-                    homeWorld: ""
-                )
-            ]
+            let models = [ResponseModelTypes.peopleModel]
             let response = PeopleResponse(count: 0,
                                           next: "",
                                           previous: "",
                                           results: models)
             return response
         case .planets:
-            let models = [
-                PlanetModel(
-                    name: "",
-                    climate: "",
-                    urlString: "",
-                    rotationPeriod: "",
-                    orbitalPeriod: "",
-                    diameter: "",
-                    gravity: "",
-                    terrain: "",
-                    surfaceWater: "",
-                    population: "",
-                    residents: [],
-                    films: []
-                )
-            ]
+            let models = [ResponseModelTypes.planetModel]
             let response = PlanetsResponse(count: 0,
                                            next: "",
                                            previous: "",
                                            results: models)
             return response
         case .starships:
-            let models = [
-                StarShipModel(
-                    name: "",
-                    model: "",
-                    urlString: "",
-                    manufacturer: "",
-                    costInCredits: "",
-                    length: "",
-                    maxAtmospheringSpeed: "",
-                    crew: "",
-                    passengers: "",
-                    cargoCapacity: "",
-                    hyperdriveRating: "",
-                    starshipClass: "",
-                    pilots: [],
-                    films: []
-                )
-            ]
+            let models = [ResponseModelTypes.starShipModel]
             let response = StarShipResponse(count: 0,
                                             next: "",
                                             previous: "",
                                             results: models)
             return response
         case .species:
-            let models = [
-                SpecieModel(
-                    name: "",
-                    classification: "",
-                    urlString: "",
-                    cargoCapacity: "",
-                    consumables: "",
-                    costInCredits: "",
-                    crew: "",
-                    films: [],
-                    people: [],
-                    length: "",
-                    manufacturer: "",
-                    maxAtmospheringSpeed: "",
-                    passengers: "",
-                    vehicleClass: ""
-                )
-            ]
+            let models = [ResponseModelTypes.specieModel]
             let response = SpecieResponse(count: 0,
                                           next: "",
                                           previous: "",
                                           results: models)
             return response
         default:
-            let models = [
-                VehicleModel(
-                    name: "",
-                    model: "",
-                    urlString: "",
-                    averageHeight: "",
-                    averageLifespan: "",
-                    designation: "",
-                    eyeColors: "",
-                    films: [],
-                    hairColors: "",
-                    homeWorld: "",
-                    language: "",
-                    people: [],
-                    skinColors: ""
-                )
-            ]
+            let models = [ResponseModelTypes.vehicleModel]
             let response = VehicleResponse(count: 0,
                                            next: "",
                                            previous: "",

@@ -31,8 +31,6 @@ final class DescriptionViewModel<T: ResponseModelProtocol>: DescriptionViewModel
     
     init(urlString: String) {
         self.urlString = urlString
-        
-//        fetchItemData()
     }
     
     func fetchItemData() {
@@ -47,14 +45,12 @@ final class DescriptionViewModel<T: ResponseModelProtocol>: DescriptionViewModel
             guard
                 let self = self
             else {
-                //                self?.delegate?.updateFailed(message: "DescriptionViewModel is missing!")
                 return
             }
             
             switch result {
             case .failure(let failure):
                 print(failure.errorMessage)
-                //                self.delegate?.updateFailed(message: failure.errorMessage)
             case .success(let success):
                 self.response = success
                 manager.addToCache(model: success, by: self.urlString)
@@ -65,6 +61,56 @@ final class DescriptionViewModel<T: ResponseModelProtocol>: DescriptionViewModel
     func updateData(at newUrlString: String) {
         urlString = newUrlString
         response = nil
+        
+        fetchNewData()
+    }
+    
+    func fetchNewData() {
+        guard let tab = getTab() else { return }
+        switch tab {
+        case .people:
+            let type = ResponseModelTypes.peopleModel
+            fetchItemData(type: type)
+        case .starships:
+            let type = ResponseModelTypes.starShipModel
+            fetchItemData(type: type)
+        case .planets:
+            let type = ResponseModelTypes.planetModel
+            fetchItemData(type: type)
+        case .species:
+            let type = ResponseModelTypes.specieModel
+            fetchItemData(type: type)
+        case .vehicles:
+            let type = ResponseModelTypes.vehicleModel
+            fetchItemData(type: type)
+        case .films:
+            let type = ResponseModelTypes.filmModel
+            fetchItemData(type: type)
+        }
+    }
+    
+    func fetchItemData<M: ResponseModelProtocol>(type: M) {
+        if let model = manager.getFromCacheDictionary(by: urlString),
+           let res = model as? M {
+            response = res
+            return
+        }
+        
+        StarWarsService().fetchData(by: urlString) { [weak self] (result: Result<M, ApiError>) in
+            guard
+                let self = self
+            else {
+                return
+            }
+            
+            switch result {
+            case .failure(let failure):
+                print(failure.errorMessage)
+            case .success(let success):
+                self.response = success
+                manager.addToCache(model: success, by: self.urlString)
+            }
+        }
     }
     
     func getTab() -> Tab? {

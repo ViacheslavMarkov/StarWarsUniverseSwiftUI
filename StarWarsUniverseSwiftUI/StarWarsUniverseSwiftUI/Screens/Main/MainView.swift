@@ -10,126 +10,45 @@ import SwiftUI
 struct MainView: View {
     //MARK: - Properties
     private let tabItems = Tab.planets.tabBarItems
-    
+    @State private var selection = 0
     @EnvironmentObject var coordinator: Coordinator<MapRouter>
     
     //MARK: - Body
     var body: some View {
-        TabView {
+        TabView(selection: $selection) {
             ForEach(tabItems, id: \.self) { tab in
+                
                 switch tab {
                 case .people:
-                    let models = [
-                        PeopleModel(
-                            name: "name",
-                            gender: "",
-                            urlString: "",
-                            height: "",
-                            mass: "",
-                            films: [],
-                            species: [],
-                            vehicles: [],
-                            starships: [],
-                            hairColor: "",
-                            skinColor: "",
-                            eyeColor: "",
-                            birthYear: "",
-                            homeWorld: ""
-                        )
-                    ]
+                    let models = [ResponseModelTypes.peopleModel]
                     let response = PeopleResponse(count: 0,
                                                   next: "",
                                                   previous: "",
                                                   results: models)
                     createTabView(type: response, tab: tab)
                 case .planets:
-                    let models = [
-                        PlanetModel(
-                            name: "",
-                            climate: "",
-                            urlString: "",
-                            rotationPeriod: "",
-                            orbitalPeriod: "",
-                            diameter: "",
-                            gravity: "",
-                            terrain: "",
-                            surfaceWater: "",
-                            population: "",
-                            residents: [],
-                            films: []
-                        )
-                    ]
+                    let models = [ResponseModelTypes.planetModel]
                     let response = PlanetsResponse(count: 0,
                                                    next: "",
                                                    previous: "",
                                                    results: models)
                     createTabView(type: response, tab: tab)
                 case .starships:
-                    let models = [
-                        StarShipModel(
-                            name: "",
-                            model: "",
-                            urlString: "",
-                            manufacturer: "",
-                            costInCredits: "",
-                            length: "",
-                            maxAtmospheringSpeed: "",
-                            crew: "",
-                            passengers: "",
-                            cargoCapacity: "",
-                            hyperdriveRating: "",
-                            starshipClass: "",
-                            pilots: [],
-                            films: []
-                        )
-                    ]
+                    let models = [ResponseModelTypes.starShipModel]
                     let response = StarShipResponse(count: 0,
                                                     next: "",
                                                     previous: "",
                                                     results: models)
                     createTabView(type: response, tab: tab)
                 case .species:
-                    let models = [
-                        SpecieModel(
-                            name: "",
-                            classification: "",
-                            urlString: "",
-                            cargoCapacity: "",
-                            consumables: "",
-                            costInCredits: "",
-                            crew: "",
-                            films: [],
-                            people: [],
-                            length: "",
-                            manufacturer: "",
-                            maxAtmospheringSpeed: "",
-                            passengers: "",
-                            vehicleClass: ""
-                        )
-                    ]
+                    let models = [ResponseModelTypes.specieModel]
                     let response = SpecieResponse(count: 0,
                                                   next: "",
                                                   previous: "",
                                                   results: models)
                     createTabView(type: response, tab: tab)
                 default:
-                    let models = [
-                        VehicleModel(
-                            name: "",
-                            model: "",
-                            urlString: "",
-                            averageHeight: "",
-                            averageLifespan: "",
-                            designation: "",
-                            eyeColors: "",
-                            films: [],
-                            hairColors: "",
-                            homeWorld: "",
-                            language: "",
-                            people: [],
-                            skinColors: ""
-                        )
-                    ]
+                    let models = [ResponseModelTypes.vehicleModel]
                     let response = VehicleResponse(count: 0,
                                                    next: "",
                                                    previous: "",
@@ -138,6 +57,9 @@ struct MainView: View {
                 }
             }
             .statusBarHidden(true)
+            .onAppear {
+                coordinator.hideAndShowNavController(isHidden: true)
+            }
         }
     }
     
@@ -151,8 +73,10 @@ struct MainView: View {
                         .resizable()
                         .aspectRatio(CGSize(width: 20, height: 20), contentMode: .fit)
                     Text(tab.title)
+                        .foregroundColor(tab.tag == selection ? .black : .gray)
                 }
             }
+            .tag(tab.tag)
     }
 }
 
