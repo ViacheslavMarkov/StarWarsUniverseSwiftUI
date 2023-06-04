@@ -11,9 +11,9 @@ protocol DescriptionViewModelProtocol: ObservableObject {
     var dictionary: [String: [String]] { get set }
     var title: String { get set }
     
-    func fetchItemData()
-    func updateData(at newUrlString: String)
+    func updateData(at newUrlString: String) async
     func getTab() -> Tab?
+    func fetchData() async
 }
 
 final class DescriptionViewModel<T: ResponseModelProtocol>: DescriptionViewModelProtocol {
@@ -33,70 +33,45 @@ final class DescriptionViewModel<T: ResponseModelProtocol>: DescriptionViewModel
         self.urlString = urlString
     }
     
-    func fetchItemData() {
-        if let model = manager.getFromCacheDictionary(by: urlString),
-           let res = model as? T {
-            response = res
-            dictionary = response?.description ?? [:]
-            return
-        }
-        
-        StarWarsService().fetchData(by: urlString) { [weak self] (result: Result<T, ApiError>) in
-            guard
-                let self = self
-            else {
-                return
-            }
-            
-            switch result {
-            case .failure(let failure):
-                print(failure.errorMessage)
-            case .success(let success):
-                self.response = success
-                manager.addToCache(model: success, by: self.urlString)
-            }
-        }
-    }
-    
-    func updateData(at newUrlString: String) {
+    func updateData(at newUrlString: String) async {
         urlString = newUrlString
         response = nil
         
-        fetchNewData()
+        await fetchData()
     }
     
-    func fetchNewData() {
+    func fetchData() async {
         guard let tab = getTab() else { return }
         switch tab {
         case .people:
             let type = ResponseModelTypes.peopleModel
-            fetchItemData(type: type)
+            await fetchItemData(type: type)
         case .starships:
             let type = ResponseModelTypes.starShipModel
-            fetchItemData(type: type)
+            await fetchItemData(type: type)
         case .planets:
             let type = ResponseModelTypes.planetModel
-            fetchItemData(type: type)
+            await fetchItemData(type: type)
         case .species:
             let type = ResponseModelTypes.specieModel
-            fetchItemData(type: type)
+            await fetchItemData(type: type)
         case .vehicles:
             let type = ResponseModelTypes.vehicleModel
-            fetchItemData(type: type)
+            await fetchItemData(type: type)
         case .films:
             let type = ResponseModelTypes.filmModel
-            fetchItemData(type: type)
+            await fetchItemData(type: type)
         }
     }
     
-    func fetchItemData<M: ResponseModelProtocol>(type: M) {
+    func fetchItemData<M: ResponseModelProtocol>(type: M) async {
         if let model = manager.getFromCacheDictionary(by: urlString),
            let res = model as? M {
             response = res
             return
         }
         
-        StarWarsService().fetchData(by: urlString) { [weak self] (result: Result<M, ApiError>) in
+        await StarWarsService().fetchData(type: type, by: urlString) { [weak self] (result) in
             guard
                 let self = self
             else {

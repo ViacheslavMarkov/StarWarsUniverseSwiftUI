@@ -23,7 +23,7 @@ final class ResponseModelTypes {
         people: [],
         skinColors: ""
     )
-
+    
     static let specieModel = SpecieModel(
         name: "",
         classification: "",
@@ -40,7 +40,7 @@ final class ResponseModelTypes {
         passengers: "",
         vehicleClass: ""
     )
-
+    
     static let starShipModel = StarShipModel(
         name: "",
         model: "",
@@ -57,7 +57,7 @@ final class ResponseModelTypes {
         pilots: [],
         films: []
     )
-
+    
     static let planetModel = PlanetModel(
         name: "",
         climate: "",
@@ -72,7 +72,7 @@ final class ResponseModelTypes {
         residents: [],
         films: []
     )
-
+    
     static let peopleModel = PeopleModel(
         name: "name",
         gender: "",
@@ -89,7 +89,7 @@ final class ResponseModelTypes {
         birthYear: "",
         homeWorld: ""
     )
-
+    
     static let filmModel = FilmModel(
         name: "name",
         urlString: "",
@@ -101,5 +101,40 @@ final class ResponseModelTypes {
         planets: [],
         starships: [],
         species: []
+    )
+    
+    static let peopleResponse = PeopleResponse(
+        count: 0,
+        next: "",
+        previous: "",
+        results: [peopleModel]
+    )
+    
+    static let planetsResponse = PlanetsResponse(
+        count: 0,
+        next: "",
+        previous: "",
+        results: [planetModel]
+    )
+    
+    static let starShipResponse = StarShipResponse(
+        count: 0,
+        next: "",
+        previous: "",
+        results: [starShipModel]
+    )
+    
+    static let specieResponse = SpecieResponse(
+        count: 0,
+        next: "",
+        previous: "",
+        results: [specieModel]
+    )
+    
+    static let vehicleResponse = VehicleResponse(
+        count: 0,
+        next: "",
+        previous: "",
+        results: [vehicleModel]
     )
 }

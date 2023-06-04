@@ -8,7 +8,7 @@
 import Foundation
 
 protocol StarWarsServiceProtocol {
-    func fetchData<T: Codable>(by urlString: String, completion: @escaping (_ result: Result<T, ApiError>) -> Void)
+    func fetchData<T: Codable>(type: T, by urlString: String, completion: @escaping (_ result: Result<T, ApiError>) -> Void) async
 }
 
 final class StarWarsService: StarWarsServiceProtocol {
@@ -16,15 +16,17 @@ final class StarWarsService: StarWarsServiceProtocol {
     static let shared: StarWarsServiceProtocol = StarWarsService()
     
     func fetchData<T: Codable>(
+        type: T,
         by urlString: String,
         completion: @escaping (_ result: Result<T, ApiError>) -> Void
-    ) {
+    ) async {
         guard
             let request = ApiRequest.defaultAPI(urlString: urlString).request
-        else { return }
-        
-        NetworkRequestManager.shared.request(request: request) { (result: Result<T, ApiError>) in
-            completion(result)
+        else {
+            completion(.failure(ApiError.message("Wrong REQUEST!!!")))
+            return
         }
+        
+        await NetworkRequestManager.shared.request(type: type, request: request, completion: completion)
     }
 }

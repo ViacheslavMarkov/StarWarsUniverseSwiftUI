@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import SwiftUI
 
 protocol NetworkRequestManagerProtocol {
-    func request<T: Codable>(request: URLRequest, completion: @escaping (Result<T, ApiError>) -> Void)
+    func request<T: Codable>(type: T, request: URLRequest, completion: @escaping (Result<T, ApiError>) -> Void) async
 }
 
 class NetworkRequestManager: NetworkRequestManagerProtocol {
@@ -17,40 +18,25 @@ class NetworkRequestManager: NetworkRequestManagerProtocol {
     
     private init() { }
     
-    public func request<T: Codable>(request: URLRequest, completion: @escaping (Result<T, ApiError>) -> Void) {
+    func request<T: Codable>(
+        type: T,
+        request: URLRequest,
+        completion: @escaping (Result<T, ApiError>) -> Void
+    ) async {
         
-        let session = URLSession.shared
-        session.dataTask(with: request) { data, response, error in
-            
-            print("REQUEST - ", request)
-            
-            if let error = error {
-                DispatchQueue.main.async {
-                    completion(.failure(.server(error)))
-                }
-                return
-            }
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
             
             if let response = response as? HTTPURLResponse,
                (400...500).contains(response.statusCode) {
-                DispatchQueue.main.async {
-                    completion(.failure(.response(response.statusCode)))
-                }
-                return
+                completion(.failure(.response(response.statusCode)))
             }
             
-            DispatchQueue.main.async {
-                if let data = data {
-                    do {
-                        let mdata = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                        print("RESPONSE - ", request, mdata)
-                        let jsonItem = try JSONDecoder().decode(T.self, from: data)
-                        completion(.success(jsonItem))
-                    } catch {
-                        completion(.failure(.wrongType(String(describing: T.self))))
-                    }
-                }
-            }
-        }.resume()
+            let json = try JSONDecoder().decode(T.self, from: data)
+            completion(.success(json))
+        }
+        catch {
+            completion(.failure(.wrongType(String(describing: T.self))))
+        }
     }
 }

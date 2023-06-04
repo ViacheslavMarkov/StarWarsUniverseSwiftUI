@@ -10,7 +10,6 @@ import SwiftUI
 struct DescriptionView<ViewModel: DescriptionViewModelProtocol>: View {
     //MARK: - Properties
     @StateObject var viewModel: ViewModel
-    
     @EnvironmentObject var coordinator: Coordinator<MapRouter>
     
     init(viewModel: ViewModel) {
@@ -31,7 +30,9 @@ struct DescriptionView<ViewModel: DescriptionViewModelProtocol>: View {
                                 .tag(value)
                                 .onTapGesture {
                                     if value.isURLString {
-                                        createNewModel(urlString: value)
+                                        Task {
+                                            await createNewModel(urlString: value)
+                                        }
                                     }
                                 }
                         }
@@ -45,7 +46,9 @@ struct DescriptionView<ViewModel: DescriptionViewModelProtocol>: View {
             }
         }
         .onAppear {
-            viewModel.fetchItemData()
+            Task {
+                await viewModel.fetchData()
+            }
         }
         .onAppear {
             coordinator.hideAndShowNavController(isHidden: false)
@@ -53,8 +56,8 @@ struct DescriptionView<ViewModel: DescriptionViewModelProtocol>: View {
     }
     
     //MARK: - Functions
-    private func createNewModel(urlString: String) {
-        viewModel.updateData(at: urlString)
+    private func createNewModel(urlString: String) async {
+        await viewModel.updateData(at: urlString)
     }
 }
 

@@ -27,7 +27,9 @@ struct CustomTabBarItemView<ViewModel>: View where ViewModel: TabBarItemViewMode
                 List(viewModel.models) { model in
                     CellView(model: model)
                         .onAppear {
-                            viewModel.loadMoreContent(currentModel: model)
+                            Task {
+                                await viewModel.loadMoreContent(currentModel: model)
+                            }
                         }
                         .frame(maxHeight: 40)
                         .onTapGesture(perform: {
@@ -43,7 +45,9 @@ struct CustomTabBarItemView<ViewModel>: View where ViewModel: TabBarItemViewMode
             }
         }
         .onAppear {
-            viewModel.fetchData()
+            Task {
+                await viewModel.fetchData()
+            }
         }
     }
     

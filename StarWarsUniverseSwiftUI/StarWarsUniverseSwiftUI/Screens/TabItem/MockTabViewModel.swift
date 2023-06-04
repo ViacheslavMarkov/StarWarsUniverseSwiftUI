@@ -8,6 +8,10 @@
 import SwiftUI
 
 class MockTabViewModel: TabBarItemViewModelProtocol {
+    func fetchDataAsync() async {
+        print("fetchDataAsync")
+    }
+    
     func loadMoreContent(currentModel model: StarWarsCellModel) {
         print("loadMoreContent")
     }

@@ -10,9 +10,9 @@ import Foundation
 protocol TabBarItemViewModelProtocol: ObservableObject {
     var models: [StarWarsCellModel] { get set }
     
-    func fetchData()
+    func fetchData() async
     func getTabBarItem() -> Tab
-    func loadMoreContent(currentModel model: StarWarsCellModel)
+    func loadMoreContent(currentModel model: StarWarsCellModel) async
 }
 
 class TabBarItemViewModel<T: RequestResponseProtocol>: TabBarItemViewModelProtocol {
@@ -32,31 +32,68 @@ class TabBarItemViewModel<T: RequestResponseProtocol>: TabBarItemViewModelProtoc
         pageURLString = tabItem.pageURLString
     }
     
-    func fetchData() {
+    //MARK: - The bad part of the code, will need to improve in some way
+    @MainActor
+    func fetchData() async {
         guard
             let pageURLString = pageURLString
         else {
             return
         }
         
-        StarWarsService.shared.fetchData(by: pageURLString, completion: { [weak self] (result: Result<T, ApiError>) in
-            guard
-                let self = self
-            else {
-//                self?.delegate?.updateFailed(message: "TabBarItemViewModel is missing!")
-                return
-            }
+        switch tabItem {
+        case .people:
+            await StarWarsService.shared.fetchData(type: ResponseModelTypes.peopleResponse, by: pageURLString, completion: { [weak self] (result) in
+                guard let self = self else { return }
+                switch result {
+                case .success(let response):
+                    self.addItemsToData(response: response)
+                case .failure(let error):
+                    print(error.errorMessage)
+                }
+            })
             
-            switch result {
-            case .failure(let error):
-                print(error)
-//                self.delegate?.updateFailed(message: error.errorMessage)
-            case .success(let response):
-                self.addItemsToData(response: response)
-                self.pageURLString = response.next
-            }
-//            self.delegate?.showASndHideDownloadIndicator(self, isShow: false)
-        })
+        case .starships:
+            await StarWarsService.shared.fetchData(type: ResponseModelTypes.starShipResponse, by: pageURLString, completion: { [weak self] (result) in
+                guard let self = self else { return }
+                switch result {
+                case .success(let response):
+                    self.addItemsToData(response: response)
+                case .failure(let error):
+                    print(error.errorMessage)
+                }
+            })
+        case .planets:
+            await StarWarsService.shared.fetchData(type: ResponseModelTypes.planetsResponse, by: pageURLString, completion: { [weak self] (result) in
+                guard let self = self else { return }
+                switch result {
+                case .success(let response):
+                    self.addItemsToData(response: response)
+                case .failure(let error):
+                    print(error.errorMessage)
+                }
+            })
+        case .species:
+            await StarWarsService.shared.fetchData(type: ResponseModelTypes.specieResponse, by: pageURLString, completion: { [weak self] (result) in
+                guard let self = self else { return }
+                switch result {
+                case .success(let response):
+                    self.addItemsToData(response: response)
+                case .failure(let error):
+                    print(error.errorMessage)
+                }
+            })
+        default:
+            await StarWarsService.shared.fetchData(type: ResponseModelTypes.vehicleResponse, by: pageURLString, completion: { [weak self] (result) in
+                guard let self = self else { return }
+                switch result {
+                case .success(let response):
+                    self.addItemsToData(response: response)
+                case .failure(let error):
+                    print(error.errorMessage)
+                }
+            })
+        }
     }
     
     func addItemsToData<T: RequestResponseProtocol>(
@@ -73,7 +110,6 @@ class TabBarItemViewModel<T: RequestResponseProtocol>: TabBarItemViewModelProtoc
         })
         let newList = createModels(models: list)
         models += newList
-//        delegate?.didUpdatedDataSource(self, models: models)
     }
     
     func createModels(
@@ -102,10 +138,10 @@ class TabBarItemViewModel<T: RequestResponseProtocol>: TabBarItemViewModelProtoc
         return item
     }
     
-    func loadMoreContent(currentModel model: StarWarsCellModel) {
+    func loadMoreContent(currentModel model: StarWarsCellModel) async {
         guard let lastItem = models.last else { return }
         if lastItem.id == model.id {
-            fetchData()
-            }
+            await fetchData()
         }
+    }
 }
